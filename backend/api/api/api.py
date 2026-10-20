@@ -11,6 +11,10 @@ from django.shortcuts import get_object_or_404
 
 def product_api_view(request, pk= None, *args, **kwargs):
     if request.method == 'GET' :
+        if pk is not None :
+            product = get_object_or_404(Product, pk=pk)
+            serializer = ProductSerializer(product)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         products = Product.objects.all()
         serializer = ProductSerializer2(products, many=True) #many = True pour dire que cce que je t'envoie est plus d'un
         return Response(
