@@ -40,3 +40,17 @@ def product_api_view(request, pk= None, *args, **kwargs):
             serializer.data,
             status=status.HTTP_200_OK
         )
+
+    if request.method == 'DELETE' :
+        if pk is None :
+            return Response({
+                'message' : 'Veuillez founir une cle (pk)'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        product = get_object_or_404(Product, pk=pk) 
+        product.delete()
+        return Response({
+            'message' : 'Produit supprime avec succes'
+        },
+        status=status.HTTP_200_OK)
+        
+
