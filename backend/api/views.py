@@ -38,7 +38,7 @@ def create(request):
         )
 
         return JsonResponse({
-            'id' : product.id,
+            'id' : product.id, #Pas erreur
             'nom' : product.nom,
             'prix' : product.prix,
             'description' : product.description,
