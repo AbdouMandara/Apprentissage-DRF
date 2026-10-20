@@ -5,8 +5,8 @@ def home(request):
     headers = request.headers
     params = request.GET
     params_nom = params.get('nom')
-    post_data = request.POST
 
+    post_data = request.POST
     print(headers)
     print('---------')
     print(post_data)
@@ -19,6 +19,10 @@ def home(request):
 # on l'utilise pour que celui qui veut acceder a l'api n;a pas besoin de fournir un cookie avant de communiquer avec cette api
 @csrf_exempt
 def create(request):
+    post_data = request.POST
+    headers = request.headers
+    print(headers)
+    print(post_data)
     return JsonResponse({
         'message' : 'Creation reussi',
     })
