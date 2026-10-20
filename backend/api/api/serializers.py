@@ -11,6 +11,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta :
         model = Product #Pour dire le model sur lequel je me base
         fields = '__all__' #Pour definir tous les champs exposes par l'api
+        read_only_fields = ['created_at', 'updated_at'] #Ca dit les champs que le client ne pourra pas modifer s'il s'agit d'un POST neamoins ca peut etre retourne
 
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
