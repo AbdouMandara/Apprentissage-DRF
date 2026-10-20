@@ -12,7 +12,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product #Pour dire le model sur lequel je me base
         fields = '__all__' #Pour definir tous les champs exposes par l'api
 
-#Serializer baser sur un model
+#Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
     nom = serializers.CharField(max_length=255)
     prix = serializers.DecimalField(max_digits=10, decimal_places=2)
