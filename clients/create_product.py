@@ -8,6 +8,8 @@ data_posted = {
     'description' : 'La mangue est bonne , youpiiiiiii !'
 }
 
-response = requests.post(endpoint, data=data_posted)
-print(response.json)
+# Je mets "json" lorsque ce que j'envoie doit etre en JSON (Cas de auth),
+# Je mets "data" losque j'envoie des foms html nomaux, images 
+response = requests.post(endpoint, json=data_posted)
+print(response.json())
 print(response.status_code)
