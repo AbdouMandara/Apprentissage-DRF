@@ -52,4 +52,4 @@ def create(request):
         'name' : product.nom,
         'prix' : product.prix,
     } for product in products]
-    return JsonResponse(data)
+    return JsonResponse(data, safe=False)
