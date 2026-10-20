@@ -1,3 +1,5 @@
+import json
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -24,6 +26,8 @@ def create(request):
     print(headers)
     print('---------------')
     print(post_data)
-    return JsonResponse({
-        'message' : 'Creation reussi',
-    })
+
+    data = json.loads(post_data) #Je fais ceci pour que ce qui est envoyer ne soit plus sous forme de byte donc sans le petit 'b' a coter donc les donnees sont sous fome de dictionnaire
+    data['message'] = 'Reussi !'
+
+    return JsonResponse(data) #Pour retourner les donnees soumisses lors de l'appel de l'api
