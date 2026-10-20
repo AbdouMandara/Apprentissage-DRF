@@ -11,9 +11,9 @@ data_posted = {
 
 # Je mets "json" lorsque ce que j'envoie doit etre en JSON (Cas de auth),
 # Je mets "data" losque j'envoie des foms html nomaux, images 
-response = requests.post(endpoint_api, json=data_posted)
+#response = requests.post(endpoint_api, json=data_posted)
 
 # Cas : losque je veux faire une requete en GET
-#response = requests.get(endpoint)
+response = requests.get(endpoint_api)
 print(response.json())
 print(response.status_code)
