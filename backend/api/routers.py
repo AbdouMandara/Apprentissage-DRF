@@ -12,6 +12,8 @@ SimpleRouter est utilise pour les operations de lecture
 """
 
 router = DefaultRouter()
+
+# Pour tester je vais me rendre sur : http://localhost:8000/api/v1/product/
 router.register('v1/product', ProductViewSet, basename='product')
 
 urlpatterns = router.urls

@@ -13,8 +13,8 @@ class ProductSerializer(serializers.ModelSerializer):
     detail_link = serializers.SerializerMethodField()
     class Meta :
         model = Product #Pour dire le model sur lequel je me base
-        #fields = '__all__' #Pour definir tous les champs exposes par l'api
-        fields = ['id', 'nom', 'description_normal', 'prix_in_dollars', 'detail_link']
+        fields = '__all__' #Pour definir tous les champs exposes par l'api
+        #fields = ['id', 'nom', 'description_normal', 'prix_in_dollars', 'detail_link']
         read_only_fields = ['created_at', 'updated_at'] #Ca dit les champs que le client ne pourra pas modifer s'il s'agit d'un POST neamoins ca peut etre retourne
 
     def validate_nom(self, value):
