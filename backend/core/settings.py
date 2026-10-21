@@ -44,6 +44,27 @@ INSTALLED_APPS = [
     'api'
 ]
 
+# Configuration de DRF modifier pour dire ce que cette app accepte comme données entrantes ou retourne
+REST_FRAMEWORK = {
+    # Définit les formats de données acceptés dans les requêtes entrantes
+    'DEFAULT_PARSER_CLASSES': [
+        # Accepte les données au format JSON
+        'rest_framework.parsers.JSONParser',
+
+        # Accepte les données de formulaire classiques
+        'rest_framework.parsers.FormParser',
+    ],
+
+    # Définit les formats d'affichage des réponses de l'API
+    'DEFAULT_RENDERER_CLASSES': [
+        # Affiche une interface web interactive pour explorer l'API
+        'rest_framework.renderers.BrowsableAPIRenderer',
+
+        # Retourne les réponses au format JSON
+        'rest_framework.renderers.JSONRenderer',
+    ],
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
