@@ -1,4 +1,4 @@
-# LEs serializer sont comme les formulaires dans Django donc on peut definir les champs d'un serializer ou encore faire le notre baser sur un model preexistant
+# Les serializer sont comme les formulaires dans Django donc on peut definir les champs d'un serializer ou encore faire le notre baser sur un model preexistant
 from api.models import Product
 from rest_framework import serializers
 """
@@ -8,9 +8,12 @@ En gros, il est l'intermediaire entre Django et le front-end.
 
 #Serializer baser sur un model
 class ProductSerializer(serializers.ModelSerializer):
+    prix_in_dollars = serializers.SerializerMethodField()
+    description_normal = serializers.SerializerMethodField()
     class Meta :
         model = Product #Pour dire le model sur lequel je me base
-        fields = '__all__' #Pour definir tous les champs exposes par l'api
+        #fields = '__all__' #Pour definir tous les champs exposes par l'api
+        fields = ['id', 'nom', 'description_normal', 'prix_in_dollars']
         read_only_fields = ['created_at', 'updated_at'] #Ca dit les champs que le client ne pourra pas modifer s'il s'agit d'un POST neamoins ca peut etre retourne
 
     def validate_nom(self, value):
@@ -19,6 +22,12 @@ class ProductSerializer(serializers.ModelSerializer):
                 "Ce nom n'est pas autorisé."
             )
         return value
+
+    # Connexion des champs qui represente les valeurs renvoyes et les methodes depuis le model
+    def get_prix_in_dollars(self, obj):
+        return obj.get_prix_in_dollars()
+    def get_description_normal(self, obj):
+        return obj.get_description_normal()
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)

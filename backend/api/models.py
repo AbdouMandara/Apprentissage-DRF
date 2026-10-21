@@ -9,5 +9,11 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_prix_in_dollars(self):
+        return f"{self.prix} $"
+    
+    def get_description_normal(self):
+        return f"Nom : {self.nom} - Prix : {self.prix} $"
+
     def __str__(self) -> str:
         return self.nom 
