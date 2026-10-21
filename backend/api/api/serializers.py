@@ -30,9 +30,13 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_description_normal(self, obj):
         return obj.get_description_normal()
 
-    # Je relis mon attribut detail_link (pour avoir le lien qui mene au detail de ce produit) a l'attribut
+    # Je relies mon attribut detail_link (pour avoir le lien qui mene au detail de ce produit) a l'attribut
     def get_detail_link(self, obj):
-        return f"http://localhost:8000/api/product/{obj.id}/"
+        request = self.context.get("request")
+        if request is None:
+            return None
+        return request.build_absolute_uri(f"/api/product/{obj.id}/")
+    
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
