@@ -16,7 +16,7 @@ class ProductViewSet(ModelViewSet):
     @action(
         detail=False,
         methods=['GET'],
-        url_path='expensive-product' #on pourra utiliser ca dans l'url ainsi pour acceder a cete route
+        url_path='expensive-product' #on pourra utiliser ca dans l'url ainsi pour acceder a cete route (ex : localhost:8000/api/v1/product/expensive-product)
     )
     def expensive_products(self, request, *args, **kwargs) :
         products = Product.objects.filter(prix__gte=500)
