@@ -5,5 +5,6 @@ from rest_framework import status
 from api.api.serializers import ProductSerializer, ProductSerializer2
 
 class ProductViewSet(ModelViewSet):
+    # C'est comme les view dans Django
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
