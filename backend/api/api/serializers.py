@@ -15,6 +15,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
     nom = serializers.CharField(max_length=255)
     prix = serializers.DecimalField(max_digits=10, decimal_places=2)
     description = serializers.CharField()
