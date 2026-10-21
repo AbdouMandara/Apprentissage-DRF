@@ -13,7 +13,7 @@ def product_api_view(request, pk= None, *args, **kwargs):
     if request.method == 'GET' :
         if pk is not None :
             product = get_object_or_404(Product, pk=pk)
-            serializer = ProductSerializer(product)
+            serializer = ProductSerializer(product, context={"request" : request})
             return Response(serializer.data, status=status.HTTP_200_OK)
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True, context={"request" : request}) #many = True pour dire que cce que je t'envoie est plus d'un
