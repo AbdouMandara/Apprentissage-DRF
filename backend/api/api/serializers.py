@@ -10,10 +10,11 @@ En gros, il est l'intermediaire entre Django et le front-end.
 class ProductSerializer(serializers.ModelSerializer):
     prix_in_dollars = serializers.SerializerMethodField()
     description_normal = serializers.SerializerMethodField()
+    detail_link = serializers.SerializerMethodField()
     class Meta :
         model = Product #Pour dire le model sur lequel je me base
         #fields = '__all__' #Pour definir tous les champs exposes par l'api
-        fields = ['id', 'nom', 'description_normal', 'prix_in_dollars']
+        fields = ['id', 'nom', 'description_normal', 'prix_in_dollars', 'detail_link']
         read_only_fields = ['created_at', 'updated_at'] #Ca dit les champs que le client ne pourra pas modifer s'il s'agit d'un POST neamoins ca peut etre retourne
 
     def validate_nom(self, value):
@@ -28,6 +29,10 @@ class ProductSerializer(serializers.ModelSerializer):
         return obj.get_prix_in_dollars()
     def get_description_normal(self, obj):
         return obj.get_description_normal()
+
+    # Je relis mon attribut detail_link (pour avoir le lien qui mene au detail de ce produit) a l'attribut
+    def get_detail_link(self, obj):
+        return f"http://localhost:8000/api/product/{obj.id}/"
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
