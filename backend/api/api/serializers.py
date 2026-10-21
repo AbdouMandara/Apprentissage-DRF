@@ -13,6 +13,12 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__' #Pour definir tous les champs exposes par l'api
         read_only_fields = ['created_at', 'updated_at'] #Ca dit les champs que le client ne pourra pas modifer s'il s'agit d'un POST neamoins ca peut etre retourne
 
+    def validate_nom(self, value):
+        if value.lower() == "test":
+            raise serializers.ValidationError(
+                "Ce nom n'est pas autorisé."
+            )
+        return value
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
