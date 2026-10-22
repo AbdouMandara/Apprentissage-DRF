@@ -58,7 +58,7 @@ REST_FRAMEWORK = {
     # Définit les formats d'affichage des réponses de l'API
     'DEFAULT_RENDERER_CLASSES': [
         # Affiche une interface web interactive pour explorer l'API
-        # 'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
 
         # Retourne les réponses au format JSON
         'rest_framework.renderers.JSONRenderer',
