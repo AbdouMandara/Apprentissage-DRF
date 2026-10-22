@@ -3,7 +3,7 @@ Le router sert à générer automatiquement les URLs associées à ton ModelView
 """
 
 from django.urls import path
-from api.api.viewset import ProductViewSet
+from api.api.viewset import ProductViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
 """
@@ -15,5 +15,6 @@ router = DefaultRouter()
 
 # Pour tester je vais me rendre sur : http://localhost:8000/api/v1/product/
 router.register('v1/product', ProductViewSet, basename='product')
+router.register('v1/user', UserViewSet, basename='user')
 
 urlpatterns = router.urls

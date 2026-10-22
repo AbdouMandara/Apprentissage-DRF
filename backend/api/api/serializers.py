@@ -10,9 +10,14 @@ En gros, il est l'intermediaire entre Django et le front-end.
 
 # Mise en place du serializer pour le User
 class UserSerializer(serializers.ModelSerializer):
+    produits_de_cet_auteur = serializers.PrimaryKeyRelatedField(
+        many=True, 
+        read_only=True, 
+        source='product_set' #le nom de l'attribut que DRF doit utiliser pour récupérer les produits de ce user comme auteur est une fk dans Product
+    )
     class Meta :
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['username', 'email', 'first_name', 'last_name', 'produits_de_cet_auteur']
 
 
 #Serializer baser sur un model
@@ -53,7 +58,7 @@ class ProductSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         if request is None:
             return None
-        return request.build_absolute_uri(f"/api/product/{obj.id}/")
+        return request.build_absolute_uri(f"/api/v1/product/{obj.id}/")
     
 #Serializer baser sans model
 class ProductSerializer2(serializers.Serializer):
