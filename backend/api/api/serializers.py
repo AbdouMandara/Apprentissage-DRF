@@ -10,14 +10,23 @@ En gros, il est l'intermediaire entre Django et le front-end.
 
 # Mise en place du serializer pour le User
 class UserSerializer(serializers.ModelSerializer):
-    produits_de_cet_auteur = serializers.PrimaryKeyRelatedField(
+    """produits_de_cet_auteur = serializers.PrimaryKeyRelatedField(
         many=True, 
         read_only=True, 
         source='product_set' #le nom de l'attribut que DRF doit utiliser pour récupérer les produits de ce user comme auteur est une fk dans Product
-    )
+    )"""
+
+    # Attribut pour avoir les produits que le user actuellement connecté a creer
+    produits_de_cet_auteur = serializers.SerializerMethodField()
     class Meta :
         model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'produits_de_cet_auteur']
+
+    # Recup des produits d'un client
+    def get_produits_de_cet_auteur(self,obj):
+        products = obj.product_set.all() # requete dans le sens inverse donc je recupere les produits lies a ce user
+        return ProductSerializer2(products, many=True).data # J'utilise le 2e serializer afin de pas reutiliser le 1er ce qui serait une repetition (mdr)
+    
 
 
 #Serializer baser sur un model
@@ -59,11 +68,8 @@ class ProductSerializer(serializers.ModelSerializer):
         if request is None:
             return None
         return request.build_absolute_uri(f"/api/v1/product/{obj.id}/")
-    
 #Serializer baser sans model
-class ProductSerializer2(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    nom = serializers.CharField(max_length=255)
-    prix = serializers.DecimalField(max_digits=10, decimal_places=2)
-    description = serializers.CharField()
-
+class ProductSerializer2(serializers.ModelSerializer):
+    class Meta :
+        model = Product
+        fields = ['nom', 'prix']
