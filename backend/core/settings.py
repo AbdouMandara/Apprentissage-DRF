@@ -73,9 +73,9 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES':[
         # DOnc si le user n'est pas authentifié il ne peut pas ecrire sur l'api (creer, modifier...); il peut juste lire
-        'rest_framework.permissions.isAuthenticatedOrReadOnly',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
-}
+} 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
