@@ -24,6 +24,12 @@ class ProductSerializer(serializers.ModelSerializer):
             )
         return value
 
+    # Nous creons le user en passant a l'attribut 'auteur_du_produit' le user qui est connecte actuellement automatiquement
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['auteur_du_produit'] = user
+        return super().create(validated_data)
+
     # Connexion des champs qui represente les valeurs renvoyes et les methodes depuis le model
     def get_prix_in_dollars(self, obj):
         return obj.get_prix_in_dollars()
