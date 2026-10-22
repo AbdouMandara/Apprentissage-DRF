@@ -2,6 +2,12 @@ from django.urls import path, include
 from .views import home, create
 from api.api.api import product_api_view
 from rest_framework.authtoken.views import obtain_auth_token
+from django.urls import path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView
+)
 
 urlpatterns = [
     path('', home, name='home'),
@@ -13,5 +19,16 @@ urlpatterns = [
     path('', include('api.routers')),
 
     # Pour avoir le token d'auth
-    path('api-token-auth/', obtain_auth_token, name='api-token-auth')
+    path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
+
+    # Pour la documentation
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('docs/',
+        SpectacularSwaggerView.as_view(url_name='schema'),
+        name='swagger-ui',
+    ),
+    path('redoc/',
+        SpectacularRedocView.as_view(url_name='schema'),
+        name='redoc',
+    ),
 ]

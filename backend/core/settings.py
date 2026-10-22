@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #third_party
     'rest_framework',
+    'drf_spectacular',
     # Local apps
     'api',
     
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
 
 # Configuration de DRF modifier pour dire ce que cette app accepte comme données entrantes ou retourne
 REST_FRAMEWORK = {
+    # Pour generer la doc
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     # Définit les formats de données acceptés dans les requêtes entrantes
     'DEFAULT_PARSER_CLASSES': [
         # Accepte les données au format JSON
@@ -60,7 +63,7 @@ REST_FRAMEWORK = {
     # Définit les formats d'affichage des réponses de l'API
     'DEFAULT_RENDERER_CLASSES': [
         # Affiche une interface web interactive pour explorer l'API
-        'rest_framework.renderers.BrowsableAPIRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
 
         # Retourne les réponses au format JSON
         'rest_framework.renderers.JSONRenderer',
@@ -80,6 +83,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ]
 } 
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API Apprentissage',
+    'DESCRIPTION': "Documentation de mon API que j'ai appris en suivant le tuto de DonaldProgrammeur",
+    'VERSION': '1.0.0',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
