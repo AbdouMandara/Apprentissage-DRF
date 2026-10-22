@@ -63,6 +63,18 @@ REST_FRAMEWORK = {
         # Retourne les réponses au format JSON
         'rest_framework.renderers.JSONRenderer',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        # on accepte une auth par session 
+        'rest_framework.authentication.SessionAuthentication',
+        #on accepte une auth en utilisant username+password
+        'rest_framework.authentication.BasicAuthentication',
+        # on accepte une auth a travers un token
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES':[
+        # DOnc si le user n'est pas authentifié il ne peut pas ecrire sur l'api (creer, modifier...); il peut juste lire
+        'rest_framework.permissions.isAuthenticatedOrReadOnly',
+    ]
 }
 
 MIDDLEWARE = [
