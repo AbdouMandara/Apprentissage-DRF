@@ -8,6 +8,7 @@ class Product(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    auteur_du_produit = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
 
     def get_prix_in_dollars(self):
         return f"{self.prix} $"
