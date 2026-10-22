@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     #third_party
     'rest_framework',
     # Local apps
-    'api'
+    'api',
+    
+    'rest_framework.authtoken',
 ]
 
 # Configuration de DRF modifier pour dire ce que cette app accepte comme données entrantes ou retourne
@@ -69,7 +71,9 @@ REST_FRAMEWORK = {
         #on accepte une auth en utilisant username+password
         'rest_framework.authentication.BasicAuthentication',
         # on accepte une auth a travers un token
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
+
+        'api.api.authentication.TokenAuthenticationCustom',
     ],
     'DEFAULT_PERMISSION_CLASSES':[
         # DOnc si le user n'est pas authentifié il ne peut pas ecrire sur l'api (creer, modifier...); il peut juste lire

@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import home, create
 from api.api.api import product_api_view
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('', home, name='home'),
@@ -10,4 +11,7 @@ urlpatterns = [
 
     # Inclusion des routes de ModelViewSet
     path('', include('api.routers')),
+
+    # Pour avoir le token d'auth
+    path('api-token-auth/', obtain_auth_token, name='api-token-auth')
 ]

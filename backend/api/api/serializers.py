@@ -36,7 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
     prix_in_dollars = serializers.SerializerMethodField()
     description_normal = serializers.SerializerMethodField()
     detail_link = serializers.SerializerMethodField()
-    auteur_du_produit = UserSerializer()
+    auteur_du_produit = UserSerializer(read_only=True)
     class Meta :
         model = Product #Pour dire le model sur lequel je me base
         fields = '__all__' #Pour definir tous les champs exposes par l'api, et utiliser lors de la validation par rapport a ce qui est envoyé
