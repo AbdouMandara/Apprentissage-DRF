@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     # Local apps
     'api',
-    
+    'drf_spectacular_sidecar',
     'rest_framework.authtoken',
 ]
 
@@ -84,10 +84,21 @@ REST_FRAMEWORK = {
     ]
 } 
 
+# Celle accessible de maniere externe
+"""
 SPECTACULAR_SETTINGS = {
     'TITLE': 'API Apprentissage',
     'DESCRIPTION': "Documentation de mon API que j'ai appris en suivant le tuto de DonaldProgrammeur",
     'VERSION': '1.0.0',
+}
+"""
+
+
+# Celle accessible en local
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Mon API - Locale',
+    'VERSION': '1.0.0',
+    'REDOC_DIST': 'SIDECAR',
 }
 
 MIDDLEWARE = [
