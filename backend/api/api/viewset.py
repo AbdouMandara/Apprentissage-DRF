@@ -6,7 +6,7 @@ from api.api.serializers import ProductSerializer, ProductSerializer2
 from rest_framework.decorators import action
 from api.api.serializers import ProductSerializer, UserSerializer
 from django.contrib.auth.models import User
-
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 # Api de User
 class UserViewSet(ReadOnlyModelViewSet):
     serializer_class = UserSerializer
@@ -17,7 +17,7 @@ class ProductViewSet(ModelViewSet):
     # C'est comme les view dans Django ca ppermet de generer les routes CRUD pour ce model
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
-
+    permission_classes = [IsAuthenticated, IsAuthenticated] #Donc pour interagir avec cette api le user doit etre connecte et faire partir du staf (etre admin)
 
     # Route personnalises 
     # Route pour les produits avec prix > 500
